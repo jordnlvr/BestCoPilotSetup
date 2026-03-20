@@ -1,0 +1,92 @@
+// VS Code Settings for Copilot Power Setup
+// Copy these into your settings.json (Ctrl+Shift+P → "Preferences: Open User Settings (JSON)")
+// Replace {{placeholders}} with your values
+{
+  // ===== COPILOT CORE =====
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "scminput": false
+  },
+  "chat.agent.enabled": true,
+  "chat.agent.maxRequests": 50,
+  "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.search.semanticTextResults": true,
+
+  // ===== CUSTOM AGENTS & MODES =====
+  "chat.promptFiles": true,
+  "chat.promptFilesLocations": {
+    ".github/prompts": true
+  },
+  "chat.modes.source": {
+    ".github/chatmodes": true
+  },
+  "chat.useCustomAgentHooks": true,
+  "chat.customAgentInSubagent.enabled": true,
+  "github.copilot.chat.agent.runTasks": true,
+
+  // ===== CODE REVIEW =====
+  "github.copilot.chat.codeGeneration.useRelevantFiles": true,
+  "github.copilot.chat.codesearch.enabled": true,
+
+  // ===== INSTRUCTIONS =====
+  "github.copilot.chat.codeGeneration.instructions": [
+    { "file": ".github/instructions/typescript.instructions.md" },
+    { "file": ".github/instructions/react.instructions.md" },
+    { "file": ".github/instructions/python.instructions.md" }
+  ],
+  "github.copilot.chat.testGeneration.instructions": [
+    { "file": ".github/instructions/testing.instructions.md" }
+  ],
+  "github.copilot.chat.reviewSelection.instructions": [
+    { "file": ".github/copilot-code-review-instructions.md" }
+  ],
+
+  // ===== EDITOR INTELLIGENCE =====
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "diffEditor.renderSideBySide": true,
+  "editor.accessibilitySupport": "off",
+
+  // ===== FORMATTING =====
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // ===== TERMINAL =====
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    }
+  },
+
+  // ===== ERROR DISPLAY =====
+  "errorLens.enabled": true,
+  "errorLens.enabledDiagnosticLevels": ["error", "warning"],
+
+  // ===== FILE MANAGEMENT =====
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.git": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/package-lock.json": true
+  }
+}

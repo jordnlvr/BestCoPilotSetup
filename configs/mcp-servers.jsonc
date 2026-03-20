@@ -1,0 +1,125 @@
+// MCP Server Configuration
+// Copy into your VS Code settings.json under "mcp" key, or into .vscode/mcp.json
+// Replace {{placeholders}} with your actual values
+//
+// IMPORTANT: All MCP servers below are configured for VS Code Copilot's MCP integration.
+// Some require API keys, some require npm packages, some require local binaries.
+// See PREREQUISITES.md for setup instructions.
+{
+  "mcp": {
+    "servers": {
+
+      // ===== RESEARCH & DOCUMENTATION =====
+
+      "tavily": {
+        // Deep web search, extraction, crawling, research
+        // Get API key at https://tavily.com
+        "type": "http",
+        "url": "https://mcp.tavily.com/mcp?tavilyApiKey={{TAVILY_API_KEY}}"
+      },
+
+      "context7": {
+        // Up-to-date library documentation lookup
+        // No API key needed — runs via npx
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@upstash/context7-mcp"]
+      },
+
+      // ===== BROWSER & TESTING =====
+
+      "playwright": {
+        // Browser automation for testing and screenshots
+        // No API key needed
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@anthropic-ai/mcp-playwright"]
+      },
+
+      // ===== DATABASE =====
+
+      "postgres": {
+        // Direct PostgreSQL query execution
+        // Requires PostgreSQL running on {{DB_PORT}}
+        "type": "stdio",
+        "command": "npx",
+        "args": [
+          "-y",
+          "@anthropic-ai/mcp-postgres",
+          "postgresql://{{DB_USER}}:{{DB_PASSWORD}}@localhost:{{DB_PORT}}/{{DB_NAME}}"
+        ]
+      },
+
+      // ===== REASONING =====
+
+      "sequential-thinking": {
+        // Step-by-step reasoning for complex problems
+        // No API key needed
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@anthropic-ai/mcp-sequential-thinking"]
+      },
+
+      // ===== VERSION CONTROL =====
+
+      "github": {
+        // GitHub API — issues, PRs, repos, code search
+        // Requires GitHub PAT with repo, read:org, read:user scopes
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@anthropic-ai/mcp-github"],
+        "env": {
+          "GITHUB_PERSONAL_ACCESS_TOKEN": "{{GITHUB_PAT}}"
+        }
+      },
+
+      // ===== PERSISTENCE =====
+
+      "memory": {
+        // Key-value memory that persists across sessions
+        // No API key needed
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@anthropic-ai/mcp-memory"]
+      },
+
+      // ===== FILESYSTEM =====
+
+      "filesystem": {
+        // File system operations with allowed directory restrictions
+        // Configure allowedDirectories to your workspace
+        "type": "stdio",
+        "command": "npx",
+        "args": [
+          "-y",
+          "@anthropic-ai/mcp-filesystem",
+          "{{WORKSPACE_PATH}}"
+        ]
+      },
+
+      // ===== GIT =====
+
+      "git": {
+        // Git operations — status, diff, log, blame
+        // No API key needed, operates on local repos
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@anthropic-ai/mcp-git"]
+      },
+
+      // ===== CODE INTELLIGENCE =====
+
+      "codebase-memory": {
+        // Semantic codebase indexing and search
+        // Requires Go binary — see PREREQUISITES.md for installation
+        // If you don't have Go installed, skip this server
+        "type": "stdio",
+        "command": "{{CODEBASE_MEMORY_BINARY_PATH}}",
+        "args": [],
+        "env": {
+          "CODEBASE_MEMORY_DIR": "{{WORKSPACE_PATH}}/.codebase-memory"
+        }
+      }
+    }
+  }
+}
